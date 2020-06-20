@@ -1,0 +1,83 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{patterns}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default]{opensans}
+\begin{document}
+
+\tdplotsetmaincoords{60}{5}
+\begin{tikzpicture}[
+    tdplot_main_coords,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    project/.style={gray, dashed, thin}
+]
+    
+	\draw[axis]
+        (0,0,0) -- (0,7,0)
+        node[anchor=south]{$x_1$};
+	\draw[axis]
+        (0,0,0) -- (7,0,0)
+        node[anchor=west]{$x_2$};
+	\draw[axis]
+        (0,0,-3) -- (0,0,7)
+        node[anchor=south]{$\varphi$};
+
+    \draw [thin, gray]
+        (7,0,-1.2857) --
+        (7,7, 1.7142) --
+        (0,7,-1.2857) -- 
+        (0,0,-4.2857) --
+        (7,0,-1.2857);
+        
+    \draw [thin, gray] (0,2.33,-3.2871) -- (7,2.33,-0.2871);
+    \draw [thin, gray] (0,4.66,-2.2885) -- (7,4.66, 0.7114);
+
+    \draw [thin, gray] (2.33,0,-3.2871) -- (2.33,7,-0.2871);
+    \draw [thin, gray] (4.66,0,-2.2885) -- (4.66,7, 0.7114);
+        
+    \draw [project] (1,1,0)   -- (1,1,  -3.4285);
+    \draw [project] (1.2,3,0) -- (1.2,3,-2.4857);
+    \draw [project] (2.3,4,0) -- (2.3,4,-1.5857);
+    \draw [project] (3.8,5,0) -- (3.8,5,-0.5142);
+    \draw [project] (5,2.8,0) -- (5,2.8,-0.9428);
+    \draw [project] (2,1.2,0) -- (2,1.2,-2.9142);
+    \draw [project] (6,3.5,0) -- (6,3.5,-0.2142);
+    \draw [blue]
+        (1,1,-3.4285) --
+        (1.2,3,-2.4857) --
+        (2.3,4,-1.5857) --
+        (3.8,5,-0.5142) --
+        (6,3.5,-0.2142) --
+        (5,2.8,-0.9428) --
+        (2,1.2,-2.9142) --
+        (1,1,-3.4285);
+        
+    \draw[thick, fill=blue, opacity=.3]
+        (1,1,0) --
+        (1.2,3,0) --
+        (2.3,4,0) --
+        (3.8,5,0) --
+        (6,3.5,0) --
+        (5,2.8,0) --
+        (2,1.2,0) --
+        (1,1,0);
+        
+    \draw (1,1)
+        node[point]{}
+        node[anchor=east]{$\mathbf{X}_1$};
+    \draw (6,3.5)
+        node[point]{}
+        node[anchor=south]{$\mathbf{X}_5$};
+    
+    \draw[->, thick]
+        (3,.5,0) -- (4,1.5,0)
+        node[anchor=west, fill=white]
+        {$\overrightarrow{\mathrm{grad}}$};
+
+\end{tikzpicture}
+
+\end{document}
