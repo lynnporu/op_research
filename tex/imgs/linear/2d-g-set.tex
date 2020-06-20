@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default]{opensans}
+\begin{document}
+
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    pointer/.style={thin, dashed}
+]
+    
+	\draw[axis]
+        (0,0) -- (0,7)
+        node[anchor=south]{$x_1$};
+	\draw[axis]
+        (0,0) -- (7,0)
+        node[anchor=west]{$x_2$};
+        
+    \draw[thick] (2,2) -- (2,5) -- (5,5) -- (5,2) -- (2,2);
+    
+    \draw[pointer] (2,0) -- (2,2) -- (0,2);
+    \draw[pointer] (5,2) -- (5,0);
+    \draw[pointer] (0,5) -- (2,5);
+    
+    \draw(2,0) node[anchor=north] {$2$};
+    \draw(5,0) node[anchor=north] {$5$};
+    \draw(0,2) node[anchor=east ] {$2$};
+    \draw(0,5) node[anchor=east ] {$5$};
+
+\end{tikzpicture}
+
+\end{document}
