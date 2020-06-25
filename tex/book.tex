@@ -26,6 +26,31 @@
  \addcontentsline{toc}{section}{#1}
 }
 
+\usepackage{tcolorbox}
+
+\newcommand\question[1]{
+ \begin{tcolorbox}[
+   colback=orange!5,
+   colframe=orange!30,
+   boxrule=0mm,
+   arc=0mm,
+   title=Дискусійне питання,
+   coltitle=black
+  ]
+  #1
+ \end{tcolorbox} 
+}
+\newcommand\note[1]{
+ \begin{tcolorbox}[
+   colback=blue!5,
+   colframe=blue!30,
+   boxrule=0mm,
+   arc=0mm
+  ]
+  #1
+ \end{tcolorbox} 
+}
+
 \begin{document}
 
 \setcounter{tocdepth}{1}
