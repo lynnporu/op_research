@@ -1,0 +1,81 @@
+\documentclass[tikz]{standalone}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage {tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary {positioning}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\begin{document}
+\begin {tikzpicture}[
+   -latex, auto, node distance =2 cm and 2cm, on grid, semithick,
+   box/.style ={
+       rectangle, draw, black, minimum width =1 cm}
+]
+
+    \node (corn) {\begin{tabular}{c}
+        Кукурудза \\ 220 кг
+    \end{tabular}};
+
+    \node (hops) [right of= corn] {\begin{tabular}{c}
+        Хміль \\ 5 кг
+    \end{tabular}};
+
+    \node (malt) [right of= hops] {\begin{tabular}{c}
+        Солод \\ 540 кг
+    \end{tabular}};
+    
+    \node (ale) [below of= corn] {\begin{tabular}{c}
+        Ель (бочка) \\
+        \fbox{\begin{tabular}{l}
+               3 кг кукурудзи \\
+               0.1 кг хмелю \\
+               15 кг солоду
+              \end{tabular}}
+    \end{tabular}};
+    
+    \node (beer) [below of= malt] {\begin{tabular}{c}
+        Пиво (бочка) \\
+        \fbox{\begin{tabular}{l}
+               7 кг кукурудзи \\
+               0.1 кг хмелю \\
+               10 кг солоду
+              \end{tabular}}
+    \end{tabular}};
+
+    \path (corn)
+        edge (ale)
+        edge (beer);
+
+    \path (hops)
+        edge [bend right= 5] (ale)
+        edge [bend left= 5] (beer);
+
+    \path (malt)
+        edge (ale)
+        edge (beer);
+        
+    \node (ale_price) [below of= ale] {
+        213 грн прибутку};
+        
+    \node (beer_price) [below of= beer] {
+        485 грн прибутку};
+        
+    \path (ale) edge (ale_price);
+    \path (beer) edge (beer_price);
+    
+    \node (profit) [below of= hops, yshift=-4cm] {
+        \begin{tabular}{c}
+            Найбільш прибуткова \\
+            комбінація?
+        \end{tabular}};
+
+    \path (ale_price) edge [bend right= 20] (profit);
+    \path (beer_price) edge [bend left= 20] (profit);
+
+\end{tikzpicture}
+\end{document}
