@@ -8,8 +8,14 @@
 \usepackage{graphicx}
 \graphicspath{{\main/imgs/}{imgs/}}
 
-
 \usepackage{subfiles}
+\usepackage{hyperref}
+
+\newcommand\sectionref[1]{
+ \textcolor{blue!80}{
+  \ref{#1}~\nameref{#1}
+ }
+}
 
 \usepackage[default,scale=.90]{opensans}
 \usepackage{newtxmath}
