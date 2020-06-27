@@ -1,6 +1,7 @@
 ## Compiled images
 
 /tex/imgs/**/*.pdf
+/tex/parts/*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
