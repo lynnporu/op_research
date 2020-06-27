@@ -1,0 +1,65 @@
+\documentclass[tikz]{standalone}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage {tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary {positioning}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\begin{document}
+\begin {tikzpicture}[
+   -latex, auto, node distance =4 cm and 2cm, on grid, semithick,
+   state/.style ={
+       rectangle, color =white,
+       draw, black, text =black, minimum width =1 cm
+}]
+
+        \node[state] (a1) {
+            \begin{tabular}{l}
+                Постачальник 1 \\
+                Пропонує $a_1$ тон
+            \end{tabular}};
+
+        \node[state, right of= a1] (a2) {
+            \begin{tabular}{l}
+                Постачальник 2 \\
+                Пропонує $a_2$ тон
+            \end{tabular}};
+            
+        \node[right of= a2] (am) {...};
+
+        \node[state, below of= a1] (b1) {
+            \begin{tabular}{l}
+                Сховище 1 \\
+                Пропонує $b_1$ тон
+            \end{tabular}};
+
+        \node[state, below of= a2] (b2) {
+            \begin{tabular}{l}
+                Сховище 2 \\
+                Пропонує $b_2$ тон
+            \end{tabular}};
+            
+        \node[right of= b2] (bm) {...};
+
+        \path (a1)
+            edge node {$c_{11}$} (b1)
+            edge [bend right =15] node {$c_{12}$} (b2)
+            edge [bend right =10, dotted] (bm);
+            
+        \path (a2)
+            edge [bend left =15] node {$c_{21}$} (b1)
+            edge node {$c_{22}$} (b2)
+            edge [dotted] (bm);
+
+        \path (am)
+            edge [dotted, bend left =10] (b1)
+            edge [dotted] (b2)
+            edge [dotted] (bm);
+            
+\end{tikzpicture}
+\end{document}

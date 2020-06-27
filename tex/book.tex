@@ -3,6 +3,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english, ukrainian]{babel}
 
+\providecommand{\main}{.}
+
+\usepackage{graphicx}
+\graphicspath{{\main/imgs/}{imgs/}}
+
+
 \usepackage{subfiles}
 
 \usepackage[default,scale=.90]{opensans}
@@ -59,8 +65,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 
-\subfile{parts/intro}
-\subfile{parts/linear}
+\subfile{\main/parts/intro}
+\subfile{\main/parts/linear}
 
 \chapter{Нелінійне програмування}
 
