@@ -12,7 +12,7 @@
 
 \begin{document}
 \begin {tikzpicture}[
-   -latex, auto, node distance =2 cm and 2cm, on grid, semithick,
+   -latex, auto, node distance =2 cm and 3cm, on grid, semithick,
    box/.style ={
        rectangle, draw, black, minimum width =1 cm}
 ]
@@ -29,8 +29,8 @@
         Солод \\ 540 кг
     \end{tabular}};
     
-    \node (ale) [below of= corn] {\begin{tabular}{c}
-        Ель (бочка) \\
+    \node (ale) [below of= corn, yshift= -.8cm] {\begin{tabular}{c}
+        Ель (у.о.) \\
         \fbox{\begin{tabular}{l}
                3 кг кукурудзи \\
                0.1 кг хмелю \\
@@ -38,8 +38,8 @@
               \end{tabular}}
     \end{tabular}};
     
-    \node (beer) [below of= malt] {\begin{tabular}{c}
-        Пиво (бочка) \\
+    \node (beer) [below of= malt, yshift= -.8cm] {\begin{tabular}{c}
+        Пиво (у.о.) \\
         \fbox{\begin{tabular}{l}
                7 кг кукурудзи \\
                0.1 кг хмелю \\
@@ -49,14 +49,14 @@
 
     \path (corn)
         edge (ale)
-        edge (beer);
-
-    \path (hops)
-        edge [bend right= 5] (ale)
         edge [bend left= 5] (beer);
 
+    \path (hops)
+        edge [bend right= 15] (ale)
+        edge [bend left= 15] (beer);
+
     \path (malt)
-        edge (ale)
+        edge [bend right= 5] (ale)
         edge (beer);
         
     \node (ale_price) [below of= ale] {
@@ -68,7 +68,7 @@
     \path (ale) edge (ale_price);
     \path (beer) edge (beer_price);
     
-    \node (profit) [below of= hops, yshift=-4cm] {
+    \node (profit) [below of= hops, yshift=-4.8cm] {
         \begin{tabular}{c}
             Найбільш прибуткова \\
             комбінація?

@@ -3,35 +3,85 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english, ukrainian]{babel}
-\usepackage[default]{opensans}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
 \begin{document}
 
 \begin{tikzpicture}[
     point/.style={circle, fill, inner sep=1.5pt, black},
     axis/.style={thin, ->},
     pointer/.style={thin, dashed},
-    feasible/.style={opacity=.3, thin}
+    feasible/.style={opacity=.3, thin},
+    legendnode/.style={
+        shape=rectangle,
+        opacity=.3,
+        minimum width= .5cm,
+        minimum height= .3cm
+    },
 ]
     
 	\draw[axis]
         (0,0) -- (0,8.0)
-        node[anchor=south]{$x_1$};
+        node[anchor=south]{$x_2$};
 	\draw[axis]
         (0,0) -- (8.0,0)
-        node[anchor=west]{$x_2$};
+        node[anchor=west]{$x_1$};
         
     \draw[feasible, fill=yellow, yellow]
-        (0, 7.3333) -- (3.1429, 0) -- (0, 0) -- (0, 7.3333);
+        (7.3333, 0) -- (0, 3.1429) -- (0, 0) -- (7.3333, 0);
         
     \draw[feasible, fill=red, red]
-        (0, 5.0) -- (5.0, 0) -- (0, 0) -- (0, 5.0);
+        (5.0, 0) -- (0, 5.0) -- (0, 0) -- (5.0, 0);
         
     \draw[feasible, fill=teal, teal]
-        (0, 3.6) -- (5.4, 0) -- (0, 0) -- (0, 3.6);
+        (3.6, 0) -- (0, 5.4) -- (0, 0) -- (3.6, 0);
         
     \draw
-        (0, 3.6) -- (2.24, 2.1067) -- (3.1429, 0) -- (0, 0) -- (0, 3.6);
+        (3.6, 0) -- (2.1067, 2.24) -- (0, 3.1429) -- (0, 0) -- (3.6, 0);
 
+    \draw(7.3333, 0) -- (7.3333, -.15) node[anchor=north] {$73.333$};
+    \draw(5, 0) -- (5, -.15) node[anchor=north] {$50$};
+    \draw(3.6, 0) -- (3.6, -.15) node[anchor=north] {$36$};
+    \draw(0, 3.1429) -- (-.15, 3.1429) node[anchor=east] {$31.429$};
+    \draw(0, 5) -- (-.15, 5) node[anchor=east] {$50$};
+    \draw(0, 5.4) -- (-.15, 5.4) node[anchor=east] {$54$};
+    
+    \draw[->] (0, 0) -- (1.775, 4.041)
+        node [anchor=west, xshift= 5pt] {$
+            \overrightarrow{\mathrm{grad}}\, \varphi =
+            \left\langle
+                \dfrac{\partial \varphi}{\partial x_1};
+                \dfrac{\partial \varphi}{\partial x_2}
+            \right\rangle =
+            \langle 213; 485 \rangle
+        $};
+        
+    \draw[dotted] (1.775, 4.041) -- (3.5134, 8.0);
+
+    \draw (2.106, 2.24) node [point] {}
+        node [anchor= west, xshift= 5pt] {
+            $\mathbf{X} = \langle 21.067, 22.400 \rangle$
+        };
+
+    \matrix [draw,below left] at (current bounding box.north east) {
+        \node [
+            legendnode, fill=yellow, draw=yellow,
+            label=right:$3 x_1 + 7 x_2 \leq 220$
+        ] {}; \\
+        \node [
+            legendnode, fill=red, draw=red,
+            label=right:$0.1 x_1 + 0.1 x_2 \leq 5$
+        ] {}; \\
+        \node [
+            legendnode, fill=teal, draw=teal,
+            label=right:$15 x_1 + 10 x_2 \leq 540$
+        ] {}; \\
+        \node [
+            legendnode,  draw, opacity=1,
+            label=right:$G$
+        ] {}; \\
+    };
+        
 \end{tikzpicture}
 
 \end{document}
