@@ -9,6 +9,20 @@
 \graphicspath{{\main/imgs/}{imgs/}}
 \usepackage{wrapfig}
 
+\newcommand\illustration[3]{
+ \begin{figure}[!ht]
+  \center\includegraphics{#1} \caption{#2}
+  \label{#3}
+ \end{figure}
+}
+
+\newcommand\asidepic[5]{
+ \begin{wrapfigure}{#1}{#2}
+  \centering\includegraphics{#3}\caption{#4}
+  \label{#5}
+ \end{wrapfigure}
+}
+
 \usepackage{subfiles}
 \usepackage{hyperref}
 
