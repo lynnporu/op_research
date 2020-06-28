@@ -19,13 +19,6 @@
         minimum height= .3cm
     },
 ]
-    
-	\draw[axis]
-        (0,0) -- (0,4)
-        node[anchor=south]{$x_2$};
-	\draw[axis]
-        (0,0) -- (4,0)
-        node[anchor=west]{$x_1$};
         
     \draw[feasible, thick, fill= pink, draw= white]
         (0, 3) -- (4, 3) -- (4, 4) -- (0, 4) -- (0, 3);
@@ -42,7 +35,30 @@
     \draw[feasible, thick, fill= violet, draw= white]
         (0, 0) -- (4, 0) -- (4, 1) -- (0, 1) -- (0, 0);
     \draw[thick, draw= violet] (0, 1) -- (4, 1);
+    
+	\draw[axis]
+        (0,0) -- (0,4)
+        node[anchor=south]{$x_2$};
+	\draw[axis]
+        (0,0) -- (4,0)
+        node[anchor=west]{$x_1$};
 
+    \matrix [draw, fill=white,below left]
+    at (current bounding box.north west) {
+        \node [
+            legendnode, fill=pink,
+            label=right:$a_{11}x_1+\ldots+a_{1n}x_1 \leq b_1$] {}; \\
+        \node [
+            legendnode, fill=blue,
+            label=right:$a_{21}x_1+\ldots+a_{2n}x_1 \leq b_2$] {}; \\
+        \node [
+            legendnode, fill=yellow,
+            label=right:$a_{31}x_1+\ldots+a_{3n}x_1 \leq b_3$] {}; \\
+        \node [
+            legendnode, fill=violet,
+            label=right:$a_{41}x_1+\ldots+a_{4n}x_1 \leq b_4$] {}; \\
+    };
+    
 \end{tikzpicture}
 
 \end{document}
