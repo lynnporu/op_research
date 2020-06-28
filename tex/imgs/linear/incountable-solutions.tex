@@ -1,0 +1,58 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    pointer/.style={thin, dashed},
+    feasible/.style={opacity=.3, thin},
+    legendnode/.style={
+        shape=rectangle,
+        opacity=.3,
+        minimum width= .5cm,
+        minimum height= .3cm
+    },
+]
+    
+	\draw[axis]
+        (0,0) -- (0,4)
+        node[anchor=south]{$x_2$};
+	\draw[axis]
+        (0,0) -- (4,0)
+        node[anchor=west]{$x_1$};
+        
+    \draw[feasible, thick, fill= orange, draw= magenta]
+        (0, 3.5) -- (3.5, 0) -- (0, 0) -- (0, 3.5);
+
+    \draw[dotted] (0, 0) -- (4, 4);
+    
+    \draw[dashed] (0, 1) -- (1, 0);
+    \draw[dashed] (0, 2) -- (2, 0);
+    \draw[dashed] (0, 3) -- (3, 0);
+    \draw[dashed] (0, 4) -- (4, 0);
+
+    \draw[->]
+        (0, 0) -- (1, 1)
+        node[anchor= west, fill= orange!30]
+        {$\overrightarrow{\mathrm{grad}}\, \varphi$};
+
+    \draw[thick, draw= orange]
+        (0, 3.5) -- (3.5, 0) -- (0, 0) -- (0, 3.5);
+        
+    \matrix [draw, fill=white,below left]
+    at (current bounding box.north east) {
+        \node [
+            legendnode, fill=orange,
+            label=right:$G$
+        ] {}; \\
+    };
+
+\end{tikzpicture}
+
+\end{document}

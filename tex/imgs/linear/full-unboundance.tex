@@ -1,0 +1,48 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    pointer/.style={thin, dashed},
+    feasible/.style={opacity=.3, thin},
+    legendnode/.style={
+        shape=rectangle,
+        opacity=.3,
+        minimum width= .5cm,
+        minimum height= .3cm
+    },
+]
+    
+	\draw[axis]
+        (0,0) -- (0,4)
+        node[anchor=south]{$x_2$};
+	\draw[axis]
+        (0,0) -- (4,0)
+        node[anchor=west]{$x_1$};
+        
+    \draw[feasible, thick, fill= pink, draw= white]
+        (0, 3) -- (4, 3) -- (4, 4) -- (0, 4) -- (0, 3);
+    \draw[thick, draw= pink] (0, 3) -- (4, 3);
+        
+    \draw[feasible, thick, fill= blue!80, draw= white]
+        (0, 4) -- (1, 4) -- (1, 0) -- (0, 0) -- (0, 4);
+    \draw[thick, draw= blue!80] (1, 4) -- (1, 0);
+        
+    \draw[feasible, thick, fill= yellow, draw= white]
+        (3, 4) -- (4, 4) -- (4, 0) -- (3, 0) -- (3, 4);
+    \draw[thick, draw= yellow] (3, 4) -- (3, 0);
+
+    \draw[feasible, thick, fill= violet, draw= white]
+        (0, 0) -- (4, 0) -- (4, 1) -- (0, 1) -- (0, 0);
+    \draw[thick, draw= violet] (0, 1) -- (4, 1);
+
+\end{tikzpicture}
+
+\end{document}

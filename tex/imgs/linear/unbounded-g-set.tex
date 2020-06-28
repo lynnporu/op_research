@@ -1,0 +1,53 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    pointer/.style={thin, dashed},
+    feasible/.style={opacity=.3, thin},
+    legendnode/.style={
+        shape=rectangle,
+        opacity=.3,
+        minimum width= .5cm,
+        minimum height= .3cm
+    },
+]
+    
+	\draw[axis]
+        (0,-2) -- (0,2)
+        node[anchor=south]{$x_2$};
+	\draw[axis]
+        (-2,0) -- (2,0)
+        node[anchor=west]{$x_1$};
+        
+    \draw[feasible, fill=magenta, magenta]
+        (.4, 2) -- (2, -1.5) -- (2, -2) -- (-2, -2) -- (-2, 2);
+    
+    \draw[thick, draw= magenta]
+        (-2, 2) -- (.4, 2) -- (2, -1.5) -- (2, -2);
+
+    \draw[dotted] (-2, -2) -- (2, 2);
+
+    \draw[->]
+        (0, 0) -- (1, 1)
+        node[anchor= west]
+        {$\overrightarrow{\mathrm{grad}}\, \varphi$};
+
+    \matrix [draw, fill=white,below left]
+    at (current bounding box.north east) {
+        \node [
+            legendnode, fill=magenta,
+            label=right:$G$
+        ] {}; \\
+    };
+
+\end{tikzpicture}
+
+\end{document}
