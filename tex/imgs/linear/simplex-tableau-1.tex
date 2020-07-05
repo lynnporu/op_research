@@ -32,7 +32,7 @@
 % #5 - text
 % #6 - color
 \newcommand\explain[6]{
-    \node [explanation, fill=#6!30!white, #1]
+    \node [explanation, fill=#6!40!white, #1]
         at (#3) (#4) {#5};
     \draw [
         thick, #2, #6
@@ -74,7 +74,7 @@
 \definecolor{darkcyan}    {rgb}{0.0,  0.72, 0.92}
 \definecolor{cream}       {rgb}{1.0,  0.99, 0.82}
 \definecolor{lavender}    {rgb}{0.71, 0.49, 0.86}
-\definecolor{mintgreen}  {rgb}{0.6,  1.0,  0.6}
+\definecolor{mintgreen}   {rgb}{0.6,  1.0,  0.6}
 
 \begin{document}
 
@@ -87,8 +87,8 @@
   \textbf{}       & \textbf{Ціна}         & \namecell{price_cell1}{$2$}                  & $3$                  & $0$                  & \namecell{price_cell2}{$0$}                      &                         &                         \\
   \textbf{}       & \textbf{Змінні}       & \namecell{vars_cell1}{$x_1$}                & \namecell{vars_cell1_2}{$x_2$}                & $s_1$                & \namecell{vars_cell2}{$s_2$}                    & \textbf{План}           & \textbf{Межа}           \\
   \textbf{Базис}  &                       & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}     &                         &                         \\ \cline{3-6}
-  \namecell{basis_cell1}{$s_1$}           & \multicolumn{1}{l|}{} & \namecell{a11_cell}{$2$}                  & $1$                  & $1$                  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c}{\namecell{solution_cell1}{$4$}} & \multicolumn{1}{c}{\namecell{bound_cell1}{$3$}} \\
-  \namecell{basis_cell2}{$s_2$}           & \multicolumn{1}{l|}{} & $1$                  & \namecell{a22_cell}{$3$}                  & $0$                  & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c}{\namecell{solution_cell2}{$4$}} & \multicolumn{1}{c}{\namecell{bound_cell2}{$1$}} \\ \cline{3-6}
+  \namecell{basis_cell1}{$s_1$}           & \multicolumn{1}{l|}{} & \namecell{a11_cell}{$2$}                  & $1$                  & $1$                  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c}{\namecell{solution_cell1}{$4$}} & \multicolumn{1}{c}{\namecell{bound_cell1}{$\phantom{1.}4\phantom{3}$}} \\
+  \namecell{basis_cell2}{$s_2$}           & \multicolumn{1}{l|}{} & $1$                  & \namecell{a22_cell}{$3$}                  & $0$                  & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c}{\namecell{solution_cell2}{$4$}} & \multicolumn{1}{c}{\namecell{bound_cell2}{$1.33$}} \\ \cline{3-6}
   \textbf{Ризик}  &                       & \namecell{risk_cell1}{$0$}                  & $0$                  & $0$                  & \namecell{risk_cell2}{$0$}                      &                         &                         \\
   \textbf{Вигода} &                       & $2$                  & \namecell{profit_cell}{$3$}                  & $0$                  & $0$                      &                         &                        
  \end{tabular}
@@ -127,14 +127,6 @@
     {magicmint};
     
  \explain
-    {right=0cm, above=-4cm} {in=90, out=180}
-    {risk_cell1}{risk_box}
-    {
-        Значення втраченої вигоди від прийнятого рішення. На поточному кроці -- нульовий рядок.
-    }
-    {pastelblue};
-    
- \explain
     {right=4.9cm, above=-4.8cm} {in=140, out=-30}
     {profit_cell}{profit_box}
     {
@@ -151,15 +143,23 @@
     {darkcyan};
     
  \explain
-    {right=-.3cm, above=3.6cm} {in=-145, out=180}
+    {right=0cm, above=-4.5cm} {in=90, out=180}
+    {risk_cell1}{risk_box}
+    {
+        Значення втраченої вигоди від прийнятого рішення. На поточному кроці -- нульовий рядок.
+    }
+    {pastelblue};
+    
+ \explain
+    {right=-.3cm, above=4.2cm} {in=-145, out=180}
     {a11_cell}{a11_box}
     {
-        Для збільшення $x_1$ на 1 потрібно зменшити $s_1$ на $a_{11}=2$. Аналогічно для решти чисел таблиці.
+        Для збільшення $x_1$ на 1 потрібно зменшити $s_1$ на $a_{11}=2$. Так само для решти чисел таблиці.
     }
     {pink};
 
  \explain
-    {right=-2cm, above=4.5cm} {in=-10, out=70}
+    {right=-.55cm, above=5.1cm, text width=8cm} {in=-30, out=70}
     {price_cell2}{price_box}
     {
         Рядок ціни задає коефіцієнти для цінової функції: $\varphi = 2 x_1 + 3 x_2 + 0 s_1 + 0 s_2$
@@ -167,7 +167,7 @@
     {mintgreen};
     
  \explain
-    {right=3cm, above=-2.6cm, text width= 3.8cm} {in=170, out=-120}
+    {right=3cm, above=-3.2cm, text width= 3.8cm} {in=170, out=-30}
     {solution_cell1}{solution_box}
     {
         Поточне значення $s_1$.
@@ -175,7 +175,7 @@
     {lavender};
     
  \explain
-    {right=2.5cm, above=-1.7cm, text width=3.2cm} {in=200, out=0}
+    {right=2.8cm, above=-1.7cm, text width=3.2cm} {in=200, out=0}
     {bound_cell1}{bound_box}
     {
         Якщо збільшуємо $x_2$, то наскільки щонайбільш, враховуючи доступні $s_1$ та $s_2$? \\ \ \\
@@ -187,7 +187,7 @@
  \draw[->, thick, pink] (a11_cell) -- (basis_cell1.12.5);
  
  \explain
-    {right=-1.15cm, above=2.8cm, text width=2.6cm} {in=-145, out=180}
+    {right=-1.15cm, above=3.4cm, text width=2.6cm} {in=-145, out=180}
     {a22_cell}{a22_box}
     {
         Аналогічно, \\

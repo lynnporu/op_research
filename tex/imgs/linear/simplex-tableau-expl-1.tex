@@ -1,0 +1,167 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\renewcommand {\baselinestretch} {1.5}
+
+\definecolor{palegreen}   {rgb}{0.6,  0.98, 0.6}
+\definecolor{pastelorange}{rgb}{1.0,  0.7,  0.28}
+\definecolor{pastelred}   {rgb}{1.0,  0.41, 0.38}
+\definecolor{pastelblue}  {rgb}{0.68, 0.78, 0.81}
+\definecolor{palegreen}   {rgb}{0.6,  0.98, 0.6}
+\definecolor{pinkorange}  {rgb}{1.0,  0.6,  0.4}
+\definecolor{magicmint}   {rgb}{0.67, 0.94, 0.82}
+\definecolor{darkcyan}    {rgb}{0.0,  0.72, 0.92}
+\definecolor{cream}       {rgb}{1.0,  0.99, 0.82}
+\definecolor{lavender}    {rgb}{0.71, 0.49, 0.86}
+\definecolor{mintgreen}   {rgb}{0.6,  1.0,  0.6}
+
+\newcommand\explain[6]{
+    \node [explanation, fill=#6!40!white, #1]
+        at (#3) (#4) {#5};
+    \draw [
+        <-, thick, #2, #6
+    ] (#3) to (#4);
+}
+
+\begin{document}
+\begin{minipage}[c][100mm][c]{113mm}
+
+\center
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.2pt, black},
+    axis/.style={thin, ->},
+    ticklabel/.style={
+        fill=white
+    },
+    explanation/.style={
+        align=left,
+        text width=5cm,
+        inner sep=5pt
+    },
+    scale=.65
+]
+
+    \draw[blue, fill=blue!20!white, opacity=.3]
+        (0, 4) -- (2, 0) -- (0, 0) -- cycle;
+
+    \draw[blue, fill=blue!20!white, opacity=.3]
+        (0, 1.33) -- (4, 0) -- (0, 0) -- cycle;
+    
+    \draw[
+        thin,
+        dotted,
+        decoration={
+            markings,
+            mark=at position 0.97 with {\arrow{>}}
+        },
+        postaction=decorate
+    ] (0, 0) -- (3, 4.5)
+        node [anchor=west, xshift= 5pt] {$
+            \overrightarrow{\mathrm{grad}}\, \varphi
+        $};
+    
+    \draw(0, 0)
+        node (point_0_0) [point] {};
+        
+    \node at (0, 4) (point_0_4) {};
+    
+    \explain
+        {right=-2.7cm, above=2cm, text width=3.2cm} {in=-35, out=0}
+        {point_0_4}{point_0_4_box}
+        {
+            За таблицею, одна з меж, допоки можна збільшувати $x_2$.
+        }
+        {pinkorange}
+    
+	\draw[axis]
+        (0,0) -- (0,5)
+        node[ticklabel, anchor=south]{$x_2$};
+	\draw[axis]
+        (0,0) -- (4.5,0)
+        node[ticklabel, anchor=west]{$x_1$};
+
+    \node at (-.25, 2.8) (y_axis_point) {};
+        
+    \explain
+        {right=-2.7cm, above=.5cm, text width=3cm} {in=-40, out=-90}
+        {y_axis_point}{y_axis_box}
+        {
+            $x_1=0$, решта параметрів змінюються.
+        }
+        {pink}
+        
+    \node at (0, 1.33) (point_0_133) {};
+    
+    \explain
+        {right=-2.9cm, above=-2.5cm, text width=3.4cm} {in=0, out=-45}
+        {point_0_133}{point_0_133_box}
+        {
+            Найменша межа збільшення -- ${x_2 \leq 1.33}$. Якщо продовжувати збільшення, розв'язок вийде з ОДР. 
+        }
+        {pinkorange}
+        
+    \foreach \x in {1.33, 4, 3}{
+        \draw(0, \x) node[point] {};
+        \draw[thin]
+            (0, \x) -- (-.15, \x)
+            node[ticklabel, anchor=east] {$\x$};
+            
+    }
+        
+    \foreach \y in {2, 4, 2}{
+        \draw(\y, 0) node[point] {};
+        \draw[thin]
+            (\y, 0) -- (\y, -.15)
+            node[ticklabel, anchor=north] {$\y$};
+    }
+    
+    \draw [dotted] (0, 3) -- (2, 3) -- (2, 0);
+    
+    \explain
+        {right=3.8cm, above=.5cm, text width=3.2cm} {in=-180, out=45}
+        {.2, .2}{point_0_0_box}
+        {
+            Поточний розв'язок, \\
+            $\mathbf{X}_0 = \langle x_1, x_2, s_1, s_2 \rangle = \langle 0, 0, 4, 4 \rangle$
+        }
+        {lavender};
+        
+    \node at (3.9, -.25) (x_axis_point) {};
+    
+    \explain
+        {right=.7cm, above=-2.5cm} {in=150, out=180}
+        {x_axis_point}{x_axis_box}
+        {
+            Рух в цьому напрямку означає незмінний $x_2=0$, але змінні решту параметрів.
+        }
+        {pink};
+        
+    \node at (1.66, 3.23) (point_166_323) {};
+    \node at (0.45, 3.60) (point_045_360) {};
+    
+    \draw[
+        thick, palegreen, ->,
+        in=10, out=-220
+    ] (point_166_323) to (point_045_360);
+    
+    \explain
+        {right=1cm, above=3cm, text width=5cm} {-, in=-120, out=-40}
+        {1.46, 3.40}{price_box}
+        {
+            Оскільки градієнт нахилений більше в сторону осі $x_2$, вигідніше збільшувати саме $x_2$.
+        }
+        {palegreen};
+    
+\end{tikzpicture}
+\end{minipage}
+
+\end{document} 
