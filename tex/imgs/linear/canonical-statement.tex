@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->}
+]
+    
+    \draw
+        (0, 2) -- (1, 0);
+    \draw
+        (0, 1.75) -- (1.25, 0);
+    \draw
+        (0, 1.5) -- (1.5, 0);
+    \draw
+        (0, 1.25) -- (1.75, 0);
+    \draw
+        (0, 1) -- (2, 0);
+        
+    \draw[->, thick] (.5, .5) -- (.2, .2);
+    
+	\draw[axis]
+        (0,0,0) -- (0,2.2,0)
+        node[anchor=south]{$x_1$};
+	\draw[axis]
+        (0,0,0) -- (2.2,0,0)
+        node[anchor=west]{$x_2$};
+
+\end{tikzpicture}
+
+\end{document}
