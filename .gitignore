@@ -1,3 +1,5 @@
+*.fuse_*
+
 ## Compiled images
 
 /tex/imgs/**/*.pdf
