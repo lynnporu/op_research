@@ -1,0 +1,88 @@
+\documentclass[tikz]{standalone}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage {tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{decorations.pathreplacing}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\begin{document}
+\begin {tikzpicture}[
+	remember picture,
+	notes/.style={
+		draw=teal, semithick
+	},
+	brace/.style={
+		decorate, notes,
+		decoration={brace, amplitude=4pt}
+	}
+]
+
+\node {\(\displaystyle \left\{
+  \begin{array}{l}
+               a_{11} x_1 + a_{12} x_2  +             s_1  =             b_1 \\
+   \subnode{a}{a_{21} x_1 + a_{22} x_2} - \subnode{s}{s_2} = \subnode{b}{b_2}
+  \end{array}
+ \right.\)};
+
+\draw [brace, decoration={mirror}]
+	(a.south west) -- (a.south east)
+	node[midway, yshift=-2pt] (a_top) {};
+
+\draw [brace, decoration={mirror}]
+	(s.south west) -- (s.south east)
+	node[midway, yshift=-2pt] (s_top) {};
+
+\draw [brace, decoration={mirror}]
+	(b.south west) -- (b.south east)
+	node[midway, yshift=-2pt] (b_top) {};
+
+\node[yshift=-2cm]{
+	\subnode{ax_m}{\(\displaystyle
+		\left[
+		 \begin{array}{ll} a_{11} & a_{22} \\ a_{21} & a_{22} \end{array}
+		\right] \left[
+		 \begin{array}{l} x_{1} \\ x_{2} \end{array}
+		\right]
+	\)} +
+	\subnode{s_m}{\(\displaystyle
+		\left[
+		 \begin{array}{ll} \delta_0 & 0 \\ 0 & \delta_1 \end{array}
+		\right]
+		\left[
+		 \begin{array}{l} s_{1} \\ s_{2} \end{array}
+		\right]
+	\)} =
+	\subnode{b_m}{\(\displaystyle
+		 \left[
+		  \begin{array}{l} b_1 \\ b_2 \end{array}
+		 \right]
+	\)}
+};
+
+\draw [brace]
+	(ax_m.north west) -- (ax_m.north east)
+	node[midway, yshift=2pt] (a_bottom) {};
+
+\draw [brace]
+	(s_m.north west) -- (s_m.north east)
+	node[midway, yshift=2pt] (s_bottom) {};
+
+\draw [brace]
+	(b_m.north west) -- (b_m.north east)
+	node[midway, yshift=2pt] (b_bottom) {};
+
+\draw[notes, ->, in=90, out=-90]
+	(a_top.south) to (a_bottom.north);
+\draw[notes, ->, in=90, out=-90]
+	(s_top.south) to (s_bottom.north);
+\draw[notes, ->, in=90, out=-90]
+	(b_top.south) to (b_bottom.north);
+
+\end{tikzpicture}
+\end{document}

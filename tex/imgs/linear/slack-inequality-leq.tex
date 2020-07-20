@@ -1,0 +1,63 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=.8,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    label/.style={
+        fill=white,
+        anchor=south west,
+        yshift=2pt, xshift=1pt
+    },
+    legendnode/.style={
+        shape=rectangle,
+        minimum width= .5cm,
+        minimum height= .5cm
+    },
+    captionnode/.style={
+        rotate=-45,
+        yshift=0pt,
+        xshift=15pt
+    }
+]
+        
+    \draw[fill=teal!10!white, draw=white]
+        (-.5,4.5) -- (4.5,-.5) -- (-.5,-.5) -- cycle;
+
+    \draw[axis]
+        (0,-.5) -- (0,5)
+        node[anchor=south]{$x_2$};
+
+    \draw[axis]
+        (-.5,0) -- (5,0)
+        node[anchor=west]{$x_1$};;
+
+    \draw[teal]
+        (-.5, 4.5) -- (4.5, -.5)
+        node[captionnode] {$s = 0$};
+    \draw[teal, dashed]
+        (-.5, 2.5) -- (2.5, -.5)
+        node[captionnode] {$s = 2$}
+        (-.5, .5) -- (.5, -.5)
+        node[captionnode] {$s = 4$};
+        
+    \matrix [draw, fill=white,below left]
+    at (current bounding box.north east) {
+        \node [legendnode, fill=teal!10!white] {}
+            node [anchor=north west] {$x_1 + x_2 \leq 4$}; \\
+        \node (node1) [legendnode] {}
+            node [anchor=north west] {$x_1 + x_2 + s = 4$}; \\
+    };
+    
+    \draw [teal] (node1.west) -- (node1.east);
+
+\end{tikzpicture}
+
+\end{document}
