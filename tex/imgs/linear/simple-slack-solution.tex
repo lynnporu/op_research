@@ -1,0 +1,74 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=.85,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    label/.style={
+        anchor=south west
+    },
+    legendnode/.style={
+        shape=rectangle,
+        minimum width= .5cm,
+        minimum height= .5cm
+    },
+    region/.style={
+        opacity=.1,
+        draw=white
+    }
+]
+        
+    \draw[region, fill=teal]
+        (-.5,3.5) -- (4.5,-.5) -- (-.5,-.5) -- cycle;
+        
+    \draw[region, fill=purple]
+        (-.5,4.5) -- (3.5,-.5) -- (-.5,-.5) -- cycle;
+
+    \draw[axis]
+        (0,-.5) -- (0,5)
+        node[anchor=south]{$x_2$};
+
+    \draw[axis]
+        (-.5,0) -- (5,0)
+        node[anchor=west]{$x_1$};
+
+    \draw[teal]
+        (-.5, 3.5) -- (4.5, -.5)
+        node[pos=1, rotate=-39.5, xshift=15pt] {$s_1 = 0$};
+    \draw[teal, dashed]
+        (-.5, 2.9) -- (3.9, -.5)
+        node[pos=1, rotate=-39.5, xshift=20pt] {$s_1 = 0.6$};
+    \draw[purple]
+        (-.5, 4.5) -- (3.5, -.5)
+        node[pos=0, rotate=-50.5, xshift=-20pt] {$s_2 = 0$};
+
+    \draw(1.714, 1.714)
+        node[point] {}
+        node[label] {$\mathbf{X}$};
+    \draw(2.85, .34)
+        node[point] {}
+        node[label] {$\mathbf{X}\sp{\prime}$};
+        
+    \matrix [draw, below left]
+    at (current bounding box.north east) {
+        \node [legendnode, fill=teal!20!white] {}
+            node [legendnode, fill=purple!20!white, anchor=north west] {}
+            node [anchor=north west, xshift=15pt] {$f_n \leq b_n$}; \\
+        \node (node1) [legendnode] {}
+            node (node2) [legendnode, anchor=north west] {}
+            node [anchor=north west, xshift=15pt] {$f_n + s_n = b_n$}; \\
+    };
+    
+    \draw [teal] (node1.west) -- (node1.east);
+    \draw [purple] (node2.west) -- (node2.east);
+
+\end{tikzpicture}
+
+\end{document}
