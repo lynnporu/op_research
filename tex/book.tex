@@ -39,7 +39,7 @@
 \usepackage[default,scale=.90]{opensans}
 \usepackage{newtxmath}
 
-\usepackage{amssymb}
+%\usepackage{amssymb}
 \usepackage{amsmath}
 
 \usepackage{geometry}
@@ -57,18 +57,22 @@
  \addcontentsline{toc}{section}{#1}
 }
 
+\newcounter{problemcounter}[chapter]
+\setcounter{problemcounter}{1}
+
 \usepackage{tcolorbox}
 
-\newenvironment{question}[1]{
+\newenvironment{problem}[2]{
  \begin{tcolorbox}[
    colback=orange!5,
    colframe=orange!30,
    boxrule=0mm,
    arc=0mm,
-   title=Питання для роздумів,
+   title=Проблема №\arabic{chapter}.\arabic{problemcounter},
    coltitle=black
   ]
-  #1
+  \refstepcounter{problemcounter}\label{#1}
+  #2
 }{
  \end{tcolorbox}
 }
