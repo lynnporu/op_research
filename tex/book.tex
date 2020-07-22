@@ -1,3 +1,5 @@
+\nonstopmode
+
 \documentclass[a5paper,10pt]{book}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -12,10 +14,15 @@
 \graphicspath{{\main/imgs/}{imgs/}}
 \usepackage{wrapfig}
 
+\newcommand\nofigillustration[3]{
+ \label{#3}
+ \center\includegraphics{#1}
+ \caption{#2}
+}
+
 \newcommand\illustration[3]{
  \begin{figure}[!ht]
-  \center\includegraphics{#1} \caption{#2}
-  \label{#3}
+  \nofigillustration{#1}{#2}{#3}
  \end{figure}
 }
 
@@ -57,12 +64,22 @@
  \addcontentsline{toc}{section}{#1}
 }
 
-\newcounter{problemcounter}[chapter]
+\newcommand\twocolminipage[2]{
+\begin{figure*}
+ \centering
+ \begin{minipage}[t]{.45\textwidth}#1\end{minipage}
+ \qquad
+ \begin{minipage}[t]{.45\textwidth}#2\end{minipage}
+\end{figure*}
+}
+
+\newcounter{problemcounter}
 \setcounter{problemcounter}{1}
 
 \usepackage{tcolorbox}
 
 \newenvironment{problem}[2]{
+ \refstepcounter{problemcounter}\label{#1}
  \begin{tcolorbox}[
    colback=orange!5,
    colframe=orange!30,
@@ -71,7 +88,6 @@
    title=Проблема №\arabic{chapter}.\arabic{problemcounter},
    coltitle=black
   ]
-  \refstepcounter{problemcounter}\label{#1}
   #2
 }{
  \end{tcolorbox}
