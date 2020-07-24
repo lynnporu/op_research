@@ -15,13 +15,13 @@
 \usepackage{wrapfig}
 
 \newcommand\nofigillustration[3]{
- \label{#3}
  \center\includegraphics{#1}
  \caption{#2}
+ \label{#3}
 }
 
 \newcommand\illustration[3]{
- \begin{figure}[!ht]
+ \begin{figure}[!h]
   \nofigillustration{#1}{#2}{#3}
  \end{figure}
 }
