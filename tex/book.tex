@@ -59,8 +59,13 @@
 \renewcommand {\baselinestretch} {1.5}
 \setlength\parindent{1cm}
 
-\newcommand\nonumchapter[1]{
+\newcommand\blindchapter[1]{
  \chapter*{#1}
+ \addcontentsline{toc}{chapter}{#1}
+}
+
+\newcommand\blindsection[1]{
+ \section*{#1}
  \addcontentsline{toc}{section}{#1}
 }
 
@@ -74,7 +79,6 @@
 }
 
 \newcounter{problemcounter}
-\setcounter{problemcounter}{1}
 
 \usepackage{tcolorbox}
 
