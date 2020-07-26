@@ -1,0 +1,42 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{ifthen}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=1.5,
+    point/.style={circle, inner sep=1pt, fill=black},
+    axis/.style={thin, ->},
+    feasible/.style={draw=none, opacity=.3, thin}
+]
+    
+	\draw[axis]
+        (0,0) -- (0,3)
+        node[anchor=south]{$x_2$};
+	\draw[axis]
+        (0,0) -- (3,0)
+        node[anchor=west]{$x_1$};
+
+    \draw[feasible, fill=teal!40]
+        (0,0) -- (0,2.5) -- (2.3,2.2) -- (2.5, 0) -- cycle;
+
+    \foreach \x in {0,1,2}{
+        \foreach \y in {0,1,2}{
+            \ifthenelse{\x < 5 \AND \y < 5}
+                {
+                    \draw (\x, \y)
+                        node [point] {}
+                        node [anchor=south west] {$\langle \x, \y \rangle$};
+                }
+                {};
+        }
+    }
+        
+\end{tikzpicture}
+
+\end{document}
