@@ -1,0 +1,77 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=.7,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    region/.style={
+        draw=none,
+        opacity=.3,
+        fill=orange
+    }
+]
+
+    \begin{scope}
+        \draw[region]
+            (-2,-1) -- (1, 0) -- (1, -2) -- (-2, -2) -- cycle;
+        \draw[orange]
+            (-2,-1) -- (1,0)
+            node[anchor=west] {$A$};
+
+        \draw[region]
+            (1,-1) -- (-2, 0) -- (-2, -2) -- (1, -2) -- cycle;
+        \draw[orange]
+            (1,-1) -- (-2,0)
+            node[anchor=east] {$B$};
+
+        \draw
+            ([shift=(-20.264:8pt)] -.5,-.5) arc (-20.265:-159.734:8pt)
+            node[midway, anchor=north] {$\gamma \ll 180^\circ$};
+    \end{scope}
+
+    \begin{scope}[xshift=5cm]
+        \draw[region]
+            (-2,-.1) -- (1, 0) -- (1, -2) -- (-2, -2) -- cycle;
+        \draw[orange]
+            (-2,-.1) -- (1,0)
+            node[anchor=west] {$A$};
+
+        \draw[region]
+            (1,-.1) -- (-2, 0) -- (-2, -2) -- (1, -2) -- cycle;
+        \draw[orange]
+            (1,-.1) -- (-2,0)
+            node[anchor=east] {$B$};
+
+        \draw
+            ([shift=(-2.862:8pt)] -.5,-.05) arc (-2.862:-177.137:8pt)
+            node[midway, anchor=north] {$\gamma \to 180^\circ$};
+    \end{scope}
+
+    \begin{scope}[xshift=10cm]
+        \draw[region]
+            (-2,.4) -- (1, 0) -- (1, -2) -- (-2, -2) -- cycle;
+        \draw[orange]
+            (-2,.4) -- (1,0)
+            node[anchor=west] {$A$};
+
+        \draw[region]
+            (1,.4) -- (-2, 0) -- (-2, -2) -- (1, -2) -- cycle;
+        \draw[orange]
+            (1,.4) -- (-2,0)
+            node[anchor=east] {$B$};
+
+        \draw
+            ([shift=(10.009:8pt)] -.5,0.2) arc (10.009:-190.007:8pt)
+            node[midway, anchor=north] {$\gamma > 180^\circ$};
+    \end{scope}
+
+\end{tikzpicture}
+
+\end{document}
