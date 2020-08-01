@@ -1,0 +1,78 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=.7,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={->},
+    tick/.style={thin},
+    grid/.style={
+        thin, dotted, teal
+    },
+    ticklabel/.style={fill=white},
+    label/.style={
+        fill=white,
+        anchor=south west,
+        yshift=4pt, xshift=1pt
+    },
+    legendnode/.style={
+        shape=rectangle,
+        minimum width= .5cm,
+        minimum height= .5cm
+    }
+]
+
+    \draw (0,4) -- (3,1);
+
+    \draw[axis]
+        (-.5,0) -- (5,0)
+        node[anchor=south]{$x_1$};
+
+    \draw[axis]
+        (0,-.5) -- (0,5)
+        node[anchor=south]{$x_2$};
+
+    \foreach \x in {1, 2, 3, 4}{
+        % x2 grid
+        \draw [grid] (\x, -.5) -- (\x, 5);
+        \coordinate (x_tick\x) at (\x, 0);
+        \coordinate (x_tick_a\x) at
+            ($(x_tick\x) - (0, 2pt)$);
+        \coordinate (x_tick_b\x) at
+            ($(x_tick\x) + (0, 2pt)$);
+        \draw [tick] (x_tick_a\x) -- (x_tick_b\x);
+        \node at (x_tick\x)
+            [ticklabel, yshift=-8pt] {$\x$};
+    }
+
+    \foreach \y in {1, 2, 3, 4}{
+        % x2 grid
+        \draw [grid] (-.5, \y) -- (5, \y);
+        \coordinate (y_tick\y) at (0, \y);
+        \coordinate (y_tick_a\y) at
+            ($(y_tick\y) - (2pt, 0)$);
+        \coordinate (y_tick_b\y) at
+            ($(y_tick\y) + (2pt, 0)$);
+        \draw [tick] (y_tick_a\y) -- (y_tick_b\y);
+        \node at (y_tick\y)
+            [ticklabel, xshift=-8pt] {$\y$};
+    }
+
+    \draw (0, 4)
+        node [point] (point40) {}
+        node [label, anchor=south west] {$\langle 0, 4 \rangle$};
+
+    \draw (3, 1)
+        node [point] (point30) {}
+        node [label, anchor=south west] {$\langle 3, 1 \rangle$};
+
+\end{tikzpicture}
+
+\end{document}

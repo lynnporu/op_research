@@ -1,0 +1,90 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usepackage{xcolor}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\definecolor{level2m}{RGB}{72,155,232}
+\definecolor{level1m}{RGB}{72,232,224}
+\definecolor{level0} {RGB}{39,204,143}
+\definecolor{level1} {RGB}{232,163,72}
+\definecolor{level2} {RGB}{232,104,72}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=.7,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={thin, ->},
+    label/.style={
+        fill=white,
+        anchor=east
+    },
+    legendnode/.style={
+        shape=rectangle,
+        minimum width= .5cm,
+        minimum height= .5cm
+    },
+    isoline/.style={
+        thin
+    },
+    isocaption/.style={
+        fill=white,
+        rotate=-22,
+        pos=0,
+        xshift=30pt
+    }
+]
+
+    \draw[isoline, draw=level1m, text=level1m]
+            (-.5,5)   -- (9.500,1) node [isocaption] {$-1$};
+
+    \draw[isoline, draw=level0, text=level0]
+            (-.5,7)   -- (9.500,3.4) node [isocaption] {$0$};
+
+    \draw[isoline, draw=level1, text=level1]
+            (5.25,7.5)   -- (9.500,5.8) node [isocaption, pos=.5] {$1$};
+
+    \draw[
+        thin,
+        dotted,
+        decoration={
+            markings,
+            mark=at position 0.9 with {\arrow{>}}
+        },
+        postaction=decorate
+    ] (2.8, 0) -- (5.8, 7.5)
+        node [anchor=south west, xshift= 9pt, pos=.85, fill=white] {$
+            \overrightarrow{\mathrm{grad}}\, \varphi
+        $};
+
+    \draw[isoline, draw=level2m, text=level2m]
+            (-.5,2.6) -- (7.250,-.5) node [isocaption] {$-2$};
+
+    \draw (4,3)
+        node [point] {}
+        node [label, yshift=-2pt, xshift=15pt, anchor=north east] {$\varphi(4,3) = -1.1$};
+
+    \draw[->] (4,3) -- (4,5)
+        node [point, yshift=4pt] {}
+        node [label, yshift=6pt, anchor=south] {$\varphi(4,5)= -0.1$};
+
+    \draw[->] (4,3) -- (6,3)
+        node [point, xshift=4pt] {}
+        node [label, yshift=-2pt, anchor=north west] {$\varphi(6,3) = -0.8$};
+
+    \draw[axis]
+        (0,-.5) -- (0,7.5)
+        node[anchor=south]{$x_2$};
+
+    \draw[axis]
+        (-.5,0) -- (9,0)
+        node[anchor=west]{$x_1$};
+
+\end{tikzpicture}
+
+\end{document}
