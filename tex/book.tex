@@ -21,7 +21,7 @@
 }
 
 \newcommand\illustration[3]{
- \begin{figure}[!h]
+ \begin{figure}[!ht]
   \nofigillustration{#1}{#2}{#3}
  \end{figure}
 }
@@ -48,6 +48,7 @@
 
 %\usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{systeme}
 
 \usepackage{geometry}
 \geometry{left   = 1.5cm}
@@ -97,8 +98,10 @@
  \end{tcolorbox}
 }
 
+\newcounter{conclusionscounter}
 
-\newenvironment{conclusions}[1]{
+\newenvironment{conclusions}[2]{
+ \refstepcounter{conclusionscounter}\label{#1}
  \begin{tcolorbox}[
    colback=red!5,
    colframe=red!30,
@@ -107,7 +110,7 @@
    title=Висновки,
    coltitle=black
   ]
-  #1
+  #2
 }{
  \end{tcolorbox}
 }
