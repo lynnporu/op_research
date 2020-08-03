@@ -1,0 +1,111 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    scale=.8,
+    point/.style={circle, fill, inner sep=1.5pt, black},
+    axis/.style={->},
+    tick/.style={thin},
+    ticklabel/.style={fill=white},
+    label/.style={
+        fill=white,
+        anchor=south west,
+        yshift=2pt, xshift=1pt
+    },
+    legendnode/.style={
+        shape=rectangle,
+        minimum width= .5cm,
+        minimum height= .5cm
+    },
+    slack_line/.style={
+        semithick
+    }
+]
+
+    % \draw [thick, draw=none, fill=cyan!10]
+    %     (0,5) -- (2,4) -- (5,1) -- (5,0) -- (0,0) -- cycle;
+
+    \draw[axis]
+        (-.5,0) -- (8,0)
+        node[anchor=west]{$x_1, x_2 = 0$};
+
+    \draw[axis]
+        (0,-.5) -- (0,8)
+        node[anchor=south]{$x_2, x_1 = 0$};
+
+    \draw[slack_line, purple]
+        (0, 5) -- (7, 1.5)
+        node[pos=.8, anchor=south west] {$\begin{array}{l}
+            s_1 = b_1 - a_{11} x_1 - a_{12} x_2 \\
+            \forall x_1, x_2: s_1 = 0
+        \end{array}$};
+
+    \draw[slack_line, orange!50!red]
+        (0, 6) -- (6, 0)
+        node[pos=.5, anchor=south west, rotate=-40, yshift=-3pt] {$\begin{array}{l}
+            s_2 = \ldots
+        \end{array}$};
+
+    \draw[slack_line, teal]
+        (5, 0) -- (5, 7)
+        node[anchor=west] {$\begin{array}{l}
+            s_3 = b_3 - a_{31} x_1 - a_{32} x_2 \\
+            \forall x_1, x_2 : s_3 = 0
+        \end{array}$};
+
+    \foreach \x in {1,...,7}{
+        % x2 grid
+        % \draw [grid] (\x, -.5) -- (\x, 5);
+        \coordinate (x_tick\x) at (\x, 0);
+        \coordinate (x_tick_a\x) at
+            ($(x_tick\x) - (0, 2pt)$);
+        \coordinate (x_tick_b\x) at
+            ($(x_tick\x) + (0, 2pt)$);
+        \draw [tick] (x_tick_a\x) -- (x_tick_b\x);
+        \node at (x_tick\x)
+            [ticklabel, yshift=-8pt] {$\x$};
+    }
+
+    \foreach \y in {1,...,7}{
+        % x1 grid
+        % \draw [grid] (-.5, \y) -- (5, \y);
+        \coordinate (y_tick\y) at (0, \y);
+        \coordinate (y_tick_a\y) at
+            ($(y_tick\y) - (2pt, 0)$);
+        \coordinate (y_tick_b\y) at
+            ($(y_tick\y) + (2pt, 0)$);
+        \draw [tick] (y_tick_a\y) -- (y_tick_b\y);
+        \node at (y_tick\y)
+            [ticklabel, xshift=-8pt] {$\y$};
+    }
+
+    \draw (0, 0)
+        node [point] {}
+        node [label, anchor=south west] {$\mathbf{X}_0$};
+
+    \draw (0, 5)
+        node [point] {}
+        node [label, anchor=west, xshift=3pt] {$\mathbf{X}_{s_1 \cap x_1}, x_2 = \dfrac{b_1}{a_{11}}$}; 
+
+    \draw (0, 6)
+        node [point] {}
+        node [label, anchor=west, xshift=3pt, yshift=4pt] {$\mathbf{X}_{s_2 \cap x_1}, x_2 = \dfrac{b_2}{a_{21}}$}; 
+
+    \draw (5, 0)
+        node [point] {}
+        node [label, anchor=south, xshift=-5pt, yshift=1pt] {$\mathbf{X}_{s_3 \cap x_2}$}; 
+
+    \draw (6, 0)
+        node [point] {}
+        node [label, anchor=south, xshift=5pt, yshift=1pt] {$\mathbf{X}_{s_2 \cap x_2}$};
+
+\end{tikzpicture}
+
+\end{document}
