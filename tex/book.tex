@@ -33,7 +33,7 @@
 }
 
 \newcommand{\subarrow}[1]{
-  % \,
+  \!
   \mathord{\raisebox{4pt}{
     \renewcommand{\arraystretch}{0}
     \begin{array}[t]{@{}c@{}}
@@ -41,7 +41,16 @@
     \end{array} 
     % \kern\scriptspace
   }}
-  \,
+  % \,
+}
+
+\newcommand{\verteq}{
+  \rotatebox{90}{$\,=$}
+}
+\newcommand{\equalto}[2]{
+  \underset{
+    \scriptstyle\overset{
+      \mkern4mu\verteq}{#2}}{#1}
 }
 
 \usepackage{xr}
