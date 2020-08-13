@@ -20,9 +20,9 @@
  \label{#3}
 }
 
-\newcommand\illustration[3]{
- \begin{figure}[!ht]
-  \nofigillustration{#1}{#2}{#3}
+\newcommand\illustration[4][!ht]{
+ \begin{figure}[#1]
+  \nofigillustration{#2}{#3}{#4}
  \end{figure}
 }
 
@@ -30,6 +30,18 @@
  \begin{wrapfigure}{#1}{#2}
   \nofigillustration{#3}{#4}{#5}
  \end{wrapfigure}
+}
+
+\newcommand{\subarrow}[1]{
+  % \,
+  \mathord{\raisebox{4pt}{
+    \renewcommand{\arraystretch}{0}
+    \begin{array}[t]{@{}c@{}}
+      #1 \\[4pt] \longrightarrow
+    \end{array} 
+    % \kern\scriptspace
+  }}
+  \,
 }
 
 \usepackage{xr}
