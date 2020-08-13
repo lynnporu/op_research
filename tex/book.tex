@@ -139,6 +139,33 @@
  \end{tcolorbox}
 }
 
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\floatname{algorithm}{Алгоритм}
+\algrenewcommand\algorithmicwhile    {\textbf{доки}}
+\algrenewcommand\algorithmicdo       {\textbf{виконувати}}
+\algrenewcommand\algorithmicrepeat   {\textbf{виконувати}}
+\algrenewcommand\algorithmicuntil    {\textbf{допоки}}
+\algrenewcommand\algorithmicend      {\textbf{кінець}}
+\algrenewcommand\algorithmicif       {\textbf{якщо}}
+\algrenewcommand\algorithmicelse     {\textbf{інакше}}
+\algrenewcommand\algorithmicthen     {\textbf{тоді}}
+\algrenewcommand\algorithmicfor      {\textbf{для}}
+\algrenewcommand\algorithmicforall   {\textbf{для всіх}}
+\algrenewcommand\algorithmicfunction {\textbf{функція}}
+\algrenewcommand\algorithmicprocedure{\textbf{процедура}}
+\algrenewcommand\algorithmicloop     {\textbf{повторювати}}
+\algrenewcommand\algorithmicrequire  {\textbf{умови:}}
+\algrenewcommand\algorithmicensure   {\textbf{переконатись, що:}}
+\algrenewcommand\algorithmicreturn   {\textbf{повернути}}
+
+\newcommand\CommentItl[1]{
+  \textcolor{green!40!black}{\Comment{
+    \textit{#1}}
+  }
+}
+
 \sloppy
 \begin{document}
 
