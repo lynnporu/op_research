@@ -1,0 +1,112 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    point/.style={circle, fill, inner sep=1.2pt, black},
+    axis/.style={thin, ->},
+    ticklabel/.style={
+        fill=white
+    },
+    scale=.8,
+    legendnode/.style={
+        shape=rectangle,
+        opacity=.3,
+        minimum width= .5cm,
+        minimum height= .3cm
+    },
+]
+
+    \draw[red!80!white]
+        (0, 4) -- (2, 0)
+        node[rotate=-65, pos=0, xshift=20pt, yshift=7pt] {$s_1 = 0$};
+
+    \draw[blue]
+        (0, 1.33) -- (4, 0)
+        node[rotate=-20, pos=1, xshift=-20pt, yshift=7pt] {$s_2 = 0$};
+
+    \draw[teal]
+        (0,0) -- (0,5)
+        node[pos=1, anchor=east] {$x_1 = 0$};
+    
+    % \draw[
+    %     thin,
+    %     dotted,
+    %     decoration={
+    %         markings,
+    %         mark=at position 0.8 with {\arrow{>}}
+    %     },
+    %     postaction=decorate
+    % ] (0, 0) -- (3, 4.5)
+    %     node [anchor=south west, xshift= 5pt] {$
+    %         \overrightarrow{\mathrm{grad}}\, \varphi
+    %     $};
+    
+    % \draw(0, 0)
+    %     node [point] {}
+    %     node [anchor=south west] {$\mathbf{X}_0$};
+    
+    \draw(0, 1.33)
+        node [point] {}
+        node [anchor=south west] {$\mathbf{X}_1$};
+    
+    \draw(1.6, 0.8)
+        node [point] {}
+        node [anchor=south west] {$\mathbf{X}_2$};
+
+	% \draw[axis]
+ %        (0,0) -- (0,5)
+ %        node[ticklabel, anchor=south]{$x_2$};
+
+    \draw[axis]
+        (0,0) -- (4.5,0)
+        node[ticklabel, anchor=west]{$x_1$};
+    \draw[axis]
+        (3.66, -1) -- (5.67,5.01)
+        node[ticklabel, anchor=south]{$s_2$};
+
+    \node at (-.25, 2.8) (y_axis_point) {};
+        
+    % \foreach \x in {1.33, 4}{
+    %     \draw(0, \x) node[point] {};
+    %     \draw[thin]
+    %         (0, \x) -- (-.15, \x)
+    %         node[ticklabel, anchor=east] {$\x$};
+            
+    % }
+        
+    \foreach \y in {0, 1.6, 4}{
+        \draw(\y, 0) node[point] {};
+        \draw[thin]
+            (\y, 0) -- (\y, -.15)
+            node[ticklabel, anchor=north] {$\y$};
+    }
+
+    \draw[dotted] (1.6, 0.8) -- (1.6, 0);
+    
+    % \draw [dotted] (0, 3) -- (2, 3) -- (2, 0);
+
+    % \matrix [draw,below left] at (8, 3.5) {
+    %     \node [
+    %         legendnode, fill=red, draw=red,
+    %         label=right:{$2 x_1 + x_2 + s_1 = 4$}
+    %     ] {}; \\
+    %     \node [
+    %         legendnode, fill=blue, draw=blue,
+    %         label=right:{$x_1 + 3 x_2 + s_2 = 4$}
+    %     ] {}; \\
+    % };
+
+\end{tikzpicture}
+
+\end{document} 
