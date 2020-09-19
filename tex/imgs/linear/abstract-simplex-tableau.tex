@@ -1,0 +1,158 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\renewcommand {\baselinestretch} {1.5}
+\setlength\parindent{1cm}
+
+% creates numerated cell
+\newcounter{nodecount}
+\newcommand\numcell[1]{
+    \addtocounter{nodecount}{1}
+    \tikz \node (\arabic{nodecount}) {#1};
+}
+
+% creates named cell
+\newcommand\namecell[2]{
+    \tikz \node (#1) {#2};
+}
+
+% creates label and points to the box in table
+% #1 - parameters of lable (such as placement or smth)
+% #2 - parameters of arrow
+% #3 - point to this point's name
+% #4 - set name of label's node
+% #5 - text
+% #6 - color
+\newcommand\explain[6]{
+    \node [explanation, fill=#6!40!white, #1]
+        at (#3) (#4) {#5};
+    \draw [
+        thick, #2, #6
+    ] (#3) to (#4);
+}
+
+% creates box with one row height
+% #1 - color
+% #2 - first node, #3 - second node
+\newcommand\vboxontwo[3]{
+ \draw [box, #1]
+    (#2.north west) -- (#3.north east) --
+    (#3.south east) -- (#2.south west) --
+    cycle;
+}
+
+% box with one column width
+\newcommand\hboxontwo[3]{
+ \draw [box, #1]
+    (#2.north west) -- (#2.north east) --
+    (#3.south east) -- (#3.south west) --
+    cycle;
+}
+
+\newcommand\singlebox[2]{
+ \draw [box, #1]
+    (#2.north west) -- (#2.north east) --
+    (#2.south east) -- (#2.south west) --
+    cycle;
+}
+
+\definecolor{palegreen}   {rgb}{0.6,  0.98, 0.6}
+\definecolor{pastelorange}{rgb}{1.0,  0.7,  0.28}
+\definecolor{pastelred}   {rgb}{1.0,  0.41, 0.38}
+\definecolor{pastelblue}  {rgb}{0.68, 0.78, 0.81}
+\definecolor{palegreen}   {rgb}{0.6,  0.98, 0.6}
+\definecolor{pinkorange}  {rgb}{1.0,  0.6,  0.4}
+\definecolor{magicmint}   {rgb}{0.67, 0.94, 0.82}
+\definecolor{darkcyan}    {rgb}{0.0,  0.72, 0.92}
+\definecolor{cream}       {rgb}{1.0,  0.99, 0.82}
+\definecolor{lavender}    {rgb}{0.71, 0.49, 0.86}
+\definecolor{mintgreen}   {rgb}{0.6,  1.0,  0.6}
+
+\begin{document}
+
+\tikzstyle{every picture}+=[remember picture,baseline]
+\tikzstyle{every node}+=[anchor=base, outer sep=4pt, inner sep=0]
+
+\begin{minipage}[t][91mm][c]{113mm}
+ \setlength{\tabcolsep}{5pt}
+ \centering
+  \begin{tabular}{rlllll}
+    \multicolumn{1}{l}{}       & $x_1$    & $x_2$    & $s_1$ & $s_2$                  & \textbf{План} \\ \cline{2-5}
+    \namecell{basis_cell1}{$s_1$} & \multicolumn{1}{|r}{$a_{11}$} & $a_{12}$ & $1$   & \multicolumn{1}{l|}{$0$} & \namecell{bound_cell1}{$b_1$}         \\
+    \namecell{basis_cell2}{$s_2$} & \multicolumn{1}{|r}{\namecell{a21_cell}{$a_{21}$}} & $a_{22}$ & $0$   & \multicolumn{1}{l|}{\namecell{s2_cell}{$1$}} & \namecell{bound_cell2}{$b_2$}         \\ \cline{2-5}
+    $\varphi$                  & $c_1$    & $c_2$    & \namecell{price0_cell0}{$0$}   & \namecell{price0_cell1}{$0$}                    &
+  \end{tabular}
+\end{minipage}
+   
+\begin{tikzpicture}[
+    overlay,
+    box/.style={thick, rounded corners},
+    explanation/.style={
+        align=left,
+        text width=5cm,
+        inner sep=5pt
+    }
+]
+
+ % paths
+
+ \hboxontwo{pinkorange}   {bound_cell1}     {bound_cell2};
+ \hboxontwo{darkcyan}     {basis_cell1}     {basis_cell2};
+ \vboxontwo{pastelred}    {price0_cell0}    {price0_cell1};
+ \singlebox{lavender}     {a21_cell};
+ \singlebox{palegreen}    {s2_cell};
+    
+ % labels
+
+ \explain
+    {right=-1.8cm, above=-3.5cm} {in=50, out=-130}
+    {a21_cell}{a21_box}
+    {
+        Змінна $x_1$ входить з коефіцієнтом $a_{21}$ у рівняння зі змінною симплекс-базису $s_2$.
+    }
+    {lavender};
+
+ \explain
+    {right=-2.1cm, above=-1cm, text width=2.7cm} {in=20, out=90}
+    {basis_cell1}{basis_box}
+    {
+        Змінні симплекс-базису, з якими асоціюються відповідні рівняння.
+    }
+    {darkcyan};
+
+ \explain
+    {right=-1cm, above=2cm, text width=3.5cm} {in=-80, out=120}
+    {s2_cell}{s2_box}
+    {
+        Змінні симплекс-базису завжди входять з коефіцієнтом $1$ у власні рівняння.
+    }
+    {palegreen};
+
+ \explain
+    {right=2.4cm, above=-1cm, text width=2.5cm} {}
+    {bound_cell1}{bound_box}
+    {
+        Ці значення є одночасно значеннями симплекс-базису.
+    }
+    {pinkorange};
+
+
+ \explain
+    {right=1.7cm, above=-3cm, text width=3.8cm} {out=-90}
+    {price0_cell0}{price_box}
+    {
+        Змінні симплекс-базису входять у цінову функцію з коефіцієнтом $0$.
+    }
+    {pastelred};
+
+\end{tikzpicture}
+
+\end{document} 
