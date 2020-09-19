@@ -1,0 +1,144 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+\usepackage[default,scale=.90]{opensans}
+\usepackage{newtxmath}
+
+\renewcommand {\baselinestretch} {1.5}
+\setlength\parindent{1cm}
+
+% creates numerated cell
+\newcounter{nodecount}
+\newcommand\numcell[1]{
+    \addtocounter{nodecount}{1}
+    \tikz \node (\arabic{nodecount}) {#1};
+}
+
+% creates named cell
+\newcommand\namecell[2]{
+    \tikz \node (#1) {#2};
+}
+
+% creates label and points to the box in table
+% #1 - parameters of lable (such as placement or smth)
+% #2 - parameters of arrow
+% #3 - point to this point's name
+% #4 - set name of label's node
+% #5 - text
+% #6 - color
+\newcommand\explain[6]{
+    \node [explanation, fill=#6!40!white, #1]
+        at (#3) (#4) {#5};
+    \draw [
+        thick, #2, #6
+    ] (#3) to (#4);
+}
+
+% creates box with one row height
+% #1 - color
+% #2 - first node, #3 - second node
+\newcommand\vboxontwo[3]{
+ \draw [box, #1]
+    (#2.north west) -- (#3.north east) --
+    (#3.south east) -- (#2.south west) --
+    cycle;
+}
+
+% box with one column width
+\newcommand\hboxontwo[3]{
+ \draw [box, #1]
+    (#2.north west) -- (#2.north east) --
+    (#3.south east) -- (#3.south west) --
+    cycle;
+}
+
+\newcommand\singlebox[2]{
+ \draw [box, #1]
+    (#2.north west) -- (#2.north east) --
+    (#2.south east) -- (#2.south west) --
+    cycle;
+}
+
+\definecolor{palegreen}   {rgb}{0.6,  0.98, 0.6}
+\definecolor{pastelorange}{rgb}{1.0,  0.7,  0.28}
+\definecolor{pastelred}   {rgb}{1.0,  0.41, 0.38}
+\definecolor{pastelblue}  {rgb}{0.68, 0.78, 0.81}
+\definecolor{palegreen}   {rgb}{0.6,  0.98, 0.6}
+\definecolor{pinkorange}  {rgb}{1.0,  0.6,  0.4}
+\definecolor{magicmint}   {rgb}{0.67, 0.94, 0.82}
+\definecolor{darkcyan}    {rgb}{0.0,  0.72, 0.92}
+\definecolor{cream}       {rgb}{1.0,  0.99, 0.82}
+\definecolor{lavender}    {rgb}{0.71, 0.49, 0.86}
+\definecolor{mintgreen}   {rgb}{0.6,  1.0,  0.6}
+
+\begin{document}
+
+\tikzstyle{every picture}+=[remember picture,baseline]
+\tikzstyle{every node}+=[anchor=base, outer sep=4pt, inner sep=0]
+
+\begin{minipage}[t][77mm][c]{113mm}
+ \setlength{\tabcolsep}{5pt}
+ \centering
+  \begin{tabular}{rllllcc}
+    \multicolumn{1}{l}{}       & $x_1$    & \namecell{pivotcol_cell1}{$x_2$}    & $s_1$ & $s_2$                  & \textbf{План} & \textbf{Межа} \\ \cline{2-5}
+    $s_1$ & \multicolumn{1}{|r}{$2$} & \namecell{a12_cell}{$1$} & $1$   & \multicolumn{1}{l|}{$0$} & \namecell{b_cell1}{$4$} & \namecell{bound_cell1}{$0.25$}         \\
+    $s_2$ & \multicolumn{1}{|r}{$1$} & $3$ & $0$   & \multicolumn{1}{l|}{$1$} & \namecell{b_cell2}{$4$} & $\approx{}1.33$        \\ \cline{2-5}
+    $\varphi$                  & $2$    & \namecell{pivotcol_cell2}{$3$}    & $0$   & $0$                    & &
+  \end{tabular}
+\end{minipage}
+   
+\begin{tikzpicture}[
+    overlay,
+    box/.style={thick, rounded corners},
+    explanation/.style={
+        align=left,
+        text width=5cm,
+        inner sep=5pt
+    }
+]
+
+ % paths
+
+ \singlebox{pinkorange}    {pivotcol_cell2};
+ \singlebox{pastelred}     {bound_cell1};
+ \singlebox{lavender}      {b_cell1};
+ \singlebox{lavender}      {a12_cell};
+
+ \draw[    thick, lavender, dashed] (a12_cell.east) -- (b_cell1.west);
+ \draw[->, thick, lavender, dashed] (b_cell1.east) -- (bound_cell1.west);
+ \draw[    thick, lavender, dashed] (a12_cell.south) -- (pivotcol_cell2.north);
+
+ % labels
+
+ \explain
+    {right=0.4cm, above=-3cm, text width=4.5cm} {in=90, out=-90}
+    {pivotcol_cell2}{pivotcol_box}
+    {
+        Стовбець $\hat{j}=2$ є роз\-в'язу\-валь\-ним, оскільки це найбільший коефіцієнт $c_i$.
+    }
+    {pinkorange};
+
+\explain
+    {right=-.5cm, above=1.2cm, text width=6cm} {out=0, in=-40}
+    {bound_cell1}{bound_box}
+    {
+        Тут $\text{межа} = \dfrac{a_{i\hat{j}}}{b_i} = \dfrac{4}{1}$. Рядок $\hat{i}=1$ є роз\-в'я\-зу\-валь\-ним, оскільки в ньому межа найменша.
+    }
+    {pastelred};
+
+\explain
+    {right=-2.5cm, above=1.2cm, text width=3cm} {out=110, in=-40}
+    {a12_cell}{a12_box}
+    {
+        Розв'язувальний елемент $a_{\hat{i}\hat{j}}=1$ при $\hat{i}=1$ та $\hat{j}=2$.
+    }
+    {lavender};
+
+\end{tikzpicture}
+
+\end{document} 
